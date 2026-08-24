@@ -16,8 +16,10 @@ Spectral CLI 6.16.1.
 | `spectral-valido.txt` | Lint do contrato publicado | **No results with a severity of 'error' found!** (código 0) |
 | `respostas-http.txt` | Experimentos 3 e 4 + extras, contra o servidor vivo | 202, 200, 422, 422, 404, 422 |
 | `docs-swagger.png` | Experimento 1 — `/docs` do FastAPI | duas operações e seis schemas |
-| `bruno/` | Experimento 2 — coleção do consumidor | 5 requisições |
-| `bruno-execucao.txt` | Execução da coleção via Bruno CLI | **12/12 asserções, PASS** |
+| `bruno-importada/` | Experimento 2 — coleção **importada do OpenAPI** | 2 operações, derivadas do contrato |
+| `bruno-importada-execucao.txt` | Execução da coleção recém-importada | `202` no POST, `404` no GET (protocolo vazio) |
+| `bruno/` | A mesma coleção, estendida com asserções e encadeamento por `Location` | 5 requisições |
+| `bruno-execucao.txt` | Execução da coleção estendida via Bruno CLI | **12/12 asserções, PASS** |
 
 ### Experimento controlado (falha deliberada)
 
@@ -40,7 +42,8 @@ Spectral CLI 6.16.1.
 
 | Arquivo | Conteúdo |
 |---|---|
-| `nota-comparativa.md` | **Nota comparativa obrigatória** — as três perspectivas e a falha deliberada |
+| `nota-curta-contrato-x-execucao.md` | **Nota curta obrigatória** — contrato explícito x contrato gerado x execução, e a falha deliberada |
+| `nota-comparativa.md` | Versão longa — as três ferramentas (Spectral, pytest, Bruno) |
 | `exploracao-contrato-x-testes.md` | Exploração em dupla: promessa não verificada + asserção dependente do contrato |
 | `questoes-exploratorias.md` | Respostas às cinco questões |
 
@@ -92,3 +95,29 @@ venv; **não** alterei o `pyproject.toml` do repositório do professor.
 `test_request_rejects_property_forbidden_by_explicit_contract`. Todos passam — o
 arquivo aparentemente ganhou um teste desde a escrita da página.
 
+**3. Bruno foi executado pela CLI, não pelo aplicativo gráfico.** O app Bruno não
+está instalado nesta máquina. A importação, porém, é real: `bruno-importada/` foi
+gerada rodando `openApiToBruno` do pacote `@usebruno/converters` sobre
+`contratos/openapi.yaml`, e serializada com `@usebruno/lang` — os mesmos pacotes
+que o aplicativo gráfico usa por baixo no **Import Collection → OpenAPI**. O
+conversor derivou tudo do documento: a tag `Elegibilidades` virou pasta, os
+`summary` viraram nomes, as `description` viraram `docs` e o exemplo
+`pedidoValido` virou o corpo do POST.
+
+`bruno/` é essa mesma coleção estendida à mão com asserções e com o encadeamento
+`POST → Location → GET`, que a importação não tem como gerar. As duas foram
+executadas de verdade com `@usebruno/cli` contra o Uvicorn. Ambas as pastas abrem
+normalmente no aplicativo gráfico.
+
+Também vale registrar, porque apareceu na primeira execução: rodando a suíte
+inteira (`pytest tests -q`), dois testes de `test_event_idempotency.py` falham no
+Windows com `PermissionError: [WinError 32]` ao limpar o SQLite temporário. São de
+outro módulo do curso e não têm relação com esta oficina — o alvo exigido aqui,
+`test_api_contract.py`, passa integralmente.
+
+## O que não foi feito
+
+A **extensão opcional do gateway Ocelot** não foi executada: exige .NET SDK 8+,
+que não está instalado nesta máquina (`dotnet --version` não encontra SDK). Por ser
+explicitamente independente da trilha essencial, foi deixada de fora — os
+entregáveis `ocelot.json` e `ocelot-consultas.txt` não existem nesta pasta.
