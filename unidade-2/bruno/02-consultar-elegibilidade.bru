@@ -1,0 +1,22 @@
+meta {
+  name: 02 consultarElegibilidade (GET 200)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/elegibilidades/{{protocolo}}
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.situacao: eq recebida
+}
+
+docs {
+  Experimento 3 (continuacao). Usa o protocolo capturado no passo 01, que veio
+  do corpo da resposta e do cabecalho Location. O consumidor nao precisa saber
+  como a URL do recurso e formada.
+}

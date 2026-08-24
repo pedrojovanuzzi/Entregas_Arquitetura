@@ -1,0 +1,11 @@
+﻿
+c:/Users/PC_PEDRO/Desktop/arquiteturabackend/arquitetura-software/laboratorios/plataforma-hospitalar/evidencias/openapi-gerado.yaml
+  1:1  warning  oas3-api-servers       OpenAPI "servers" must be present and non-empty array.
+  2:6  warning  info-contact           Info object must have "contact" object.                        info
+  2:6  warning  info-description       Info "description" must be present and non-empty string.       info
+ 7:10    error  operation-description  Operation "description" must be present and non-empty string.  paths./elegibilidades.post
+ 7:10    error  operation-tags         Operation must have non-empty "tags" array.                    paths./elegibilidades.post
+ 37:9    error  operation-description  Operation "description" must be present and non-empty string.  paths./elegibilidades/{protocolo}.get
+ 37:9    error  operation-tags         Operation must have non-empty "tags" array.                    paths./elegibilidades/{protocolo}.get
+
+✖ 7 problems (4 errors, 3 warnings, 0 infos, 0 hints)

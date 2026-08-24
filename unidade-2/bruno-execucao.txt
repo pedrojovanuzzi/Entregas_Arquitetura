@@ -1,0 +1,49 @@
+﻿node.exe : npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster 
+implementation
+No linha:1 caractere:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm warn deprec... implementation:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm warn deprecated crypto-js@4.2.0: Active development of CryptoJS has been discontinued. This library is no longer 
+maintained.
+npm warn deprecated uuid@10.0.0: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  
+For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+01-criar-elegibilidade (202 Accepted) - 12 ms
+Assertions
+   ✓ res.status: eq 202
+   ✓ res.body.situacao: eq recebida
+02-consultar-elegibilidade (200 OK) - 4 ms
+Assertions
+   ✓ res.status: eq 200
+   ✓ res.body.situacao: eq recebida
+03-post-sem-cpf (422 Unprocessable Content) - 3 ms
+Assertions
+   ✓ res.status: eq 422
+   ✓ res.body.codigo: eq dados_invalidos
+   ✓ res.body.detalhes[0].campo: eq body.cpf
+04-post-cpf-invalido (422 Unprocessable Content) - 3 ms
+Assertions
+   ✓ res.status: eq 422
+   ✓ res.body.codigo: eq dados_invalidos
+   ✓ res.body.detalhes[0].tipo: eq string_pattern_mismatch
+05-get-protocolo-inexistente (404 Not Found) - 3 ms
+Assertions
+   ✓ res.status: eq 404
+   ✓ res.body.codigo: eq elegibilidade_nao_encontrada
+
+📊 Execution Summary
+┌───────────────┬──────────────┐
+│ Metric        │    Result    │
+├───────────────┼──────────────┤
+│ Status        │    ✓ PASS    │
+├───────────────┼──────────────┤
+│ Requests      │ 5 (5 Passed) │
+├───────────────┼──────────────┤
+│ Tests         │     0/0      │
+├───────────────┼──────────────┤
+│ Assertions    │    12/12     │
+├───────────────┼──────────────┤
+│ Duration (ms) │     407      │
+└───────────────┴──────────────┘

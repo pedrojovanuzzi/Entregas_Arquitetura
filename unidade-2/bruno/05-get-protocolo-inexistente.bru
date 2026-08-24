@@ -1,0 +1,21 @@
+meta {
+  name: 05 GET protocolo inexistente (404)
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/elegibilidades/protocolo-inexistente
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+  res.body.codigo: eq elegibilidade_nao_encontrada
+}
+
+docs {
+  Verifica a outra resposta contratada do GET. O corpo usa o mesmo schema
+  ErroAPI do 422, com um codigo diferente e estavel.
+}

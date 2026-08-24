@@ -1,0 +1,116 @@
+========================================================================
+ EXPERIMENTO 3 — POST /elegibilidades com dados VÁLIDOS
+========================================================================
+REQUEST  : POST /elegibilidades
+BODY     :
+{
+  "cpf": "12345678901",
+  "codigo_operadora": "OPS-001",
+  "matricula_plano": "MAT-2026-001"
+}
+
+STATUS   : 202 Accepted
+LOCATION : /elegibilidades/098de1ae-6dec-46a4-bf95-7a2833b946a3
+CONTENT-TYPE: application/json
+BODY     :
+{
+  "protocolo": "098de1ae-6dec-46a4-bf95-7a2833b946a3",
+  "situacao": "recebida",
+  "criado_em": "2026-08-24T17:38:22.150458Z"
+}
+
+========================================================================
+ EXPERIMENTO 3 (cont.) — GET seguindo o cabeçalho Location
+========================================================================
+REQUEST  : GET /elegibilidades/098de1ae-6dec-46a4-bf95-7a2833b946a3
+
+STATUS   : 200 OK
+CONTENT-TYPE: application/json
+BODY     :
+{
+  "protocolo": "098de1ae-6dec-46a4-bf95-7a2833b946a3",
+  "situacao": "recebida",
+  "criado_em": "2026-08-24T17:38:22.150458Z"
+}
+
+Mesmo protocolo do POST? True
+Corpo idêntico ao do POST? True
+
+========================================================================
+ EXPERIMENTO 4 — POST /elegibilidades SEM o campo obrigatório cpf
+========================================================================
+REQUEST  : POST /elegibilidades
+BODY     :
+{
+  "codigo_operadora": "OPS-001",
+  "matricula_plano": "MAT-2026-001"
+}
+
+STATUS   : 422 Unprocessable Content
+CONTENT-TYPE: application/json
+BODY     :
+{
+  "codigo": "dados_invalidos",
+  "mensagem": "A requisição não atende ao contrato.",
+  "detalhes": [
+    {
+      "campo": "body.cpf",
+      "mensagem": "Field required",
+      "tipo": "missing"
+    }
+  ]
+}
+
+codigo == 'dados_invalidos'? True
+detalhe com campo == 'body.cpf'? True
+
+========================================================================
+ EXTRA A — POST com cpf='123' (o mesmo valor da falha deliberada do Spectral)
+========================================================================
+Mostra que o servidor rejeita em tempo de execução o mesmo dado que o
+Spectral rejeitou em tempo de documento.
+
+STATUS   : 422 Unprocessable Content
+CONTENT-TYPE: application/json
+BODY     :
+{
+  "codigo": "dados_invalidos",
+  "mensagem": "A requisição não atende ao contrato.",
+  "detalhes": [
+    {
+      "campo": "body.cpf",
+      "mensagem": "String should match pattern '^\\d{11}$'",
+      "tipo": "string_pattern_mismatch"
+    }
+  ]
+}
+
+========================================================================
+ EXTRA B — GET com protocolo inexistente (404 contratado)
+========================================================================
+STATUS   : 404 Not Found
+CONTENT-TYPE: application/json
+BODY     :
+{
+  "codigo": "elegibilidade_nao_encontrada",
+  "mensagem": "Protocolo de elegibilidade não encontrado.",
+  "detalhes": []
+}
+
+========================================================================
+ EXTRA C — POST com propriedade não contratada (additionalProperties: false)
+========================================================================
+STATUS   : 422 Unprocessable Content
+CONTENT-TYPE: application/json
+BODY     :
+{
+  "codigo": "dados_invalidos",
+  "mensagem": "A requisição não atende ao contrato.",
+  "detalhes": [
+    {
+      "campo": "body.campo_nao_contratado",
+      "mensagem": "Extra inputs are not permitted",
+      "tipo": "extra_forbidden"
+    }
+  ]
+}

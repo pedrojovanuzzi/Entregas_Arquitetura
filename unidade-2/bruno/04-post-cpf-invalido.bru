@@ -1,0 +1,35 @@
+meta {
+  name: 04 POST cpf=123 (422 string_pattern_mismatch)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/elegibilidades
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "cpf": "123",
+    "codigo_operadora": "OPS-001",
+    "matricula_plano": "MAT-2026-001"
+  }
+}
+
+assert {
+  res.status: eq 422
+  res.body.codigo: eq dados_invalidos
+  res.body.detalhes[0].tipo: eq string_pattern_mismatch
+}
+
+docs {
+  Mesmo valor de cpf usado na falha deliberada do Spectral. Serve para mostrar
+  que o mesmo dado e recusado nas duas frentes: pelo linter em tempo de
+  documento e pelo servidor em tempo de execucao.
+}

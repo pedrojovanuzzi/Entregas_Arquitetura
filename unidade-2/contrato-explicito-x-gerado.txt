@@ -1,0 +1,63 @@
+========================================================================
+ COMPARAÇÃO: contrato explícito (openapi.yaml) x contrato gerado (app.openapi())
+========================================================================
+
+Versão OpenAPI declarada  — explícito: 3.1.0 | gerado: 3.1.0
+
+------------------------------------------------------------------------
+1. CAMINHOS
+------------------------------------------------------------------------
+Somente no explícito : (nenhum)
+Somente no gerado    : (nenhum)
+Em ambos             : ['/elegibilidades', '/elegibilidades/{protocolo}']
+
+------------------------------------------------------------------------
+2. STATUS DOCUMENTADOS x GERADOS, POR OPERAÇÃO
+------------------------------------------------------------------------
+POST /elegibilidades
+   explícito : ['202', '422']
+   gerado    : ['202', '422']
+   só no explícito : (nenhum)
+   só no gerado    : (nenhum)
+
+GET /elegibilidades/{protocolo}
+   explícito : ['200', '404']
+   gerado    : ['200', '404', '422']
+   só no explícito : (nenhum)
+   só no gerado    : ['422']
+
+------------------------------------------------------------------------
+3. SCHEMAS EM components
+------------------------------------------------------------------------
+Somente no explícito : (nenhum)
+Somente no gerado    : ['HTTPValidationError', 'ValidationError']
+Em ambos             : ['DetalheErro', 'ElegibilidadeAceita', 'ErroAPI', 'PedidoElegibilidade']
+
+------------------------------------------------------------------------
+4. SCHEMA REFERENCIADO NO 422 DO POST /elegibilidades
+------------------------------------------------------------------------
+explícito : #/components/schemas/ErroAPI
+gerado    : #/components/schemas/ErroAPI
+
+------------------------------------------------------------------------
+5. TAGS DAS OPERAÇÕES
+------------------------------------------------------------------------
+POST /elegibilidades
+   explícito : ['Elegibilidades']
+   gerado    : (nenhuma)
+GET /elegibilidades/{protocolo}
+   explícito : ['Elegibilidades']
+   gerado    : (nenhuma)
+
+------------------------------------------------------------------------
+6. PONTOS VERIFICADOS PELOS TESTES (concordância exigida)
+------------------------------------------------------------------------
+required de PedidoElegibilidade — explícito: ['codigo_operadora', 'cpf', 'matricula_plano']
+required de PedidoElegibilidade — gerado   : ['codigo_operadora', 'cpf', 'matricula_plano']
+iguais? True
+
+header Location idêntico? True
+
+description do 202 idêntica? True
+   explícito : 'Pedido aceito para processamento.'
+   gerado    : 'Pedido aceito para processamento.'

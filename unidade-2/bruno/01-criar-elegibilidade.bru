@@ -1,0 +1,40 @@
+meta {
+  name: 01 criarElegibilidade (POST 202)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/elegibilidades
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "cpf": "12345678901",
+    "codigo_operadora": "OPS-001",
+    "matricula_plano": "MAT-2026-001"
+  }
+}
+
+vars:post-response {
+  protocolo: res.body.protocolo
+  location: res.headers.location
+}
+
+assert {
+  res.status: eq 202
+  res.body.situacao: eq recebida
+}
+
+docs {
+  Experimento 3 da oficina. O contrato promete 202 Accepted, corpo
+  ElegibilidadeAceita e o cabecalho Location apontando para o recurso criado.
+  O protocolo devolvido e guardado em uma variavel para a requisicao seguinte,
+  em vez de ser montado por convencao pelo consumidor.
+}

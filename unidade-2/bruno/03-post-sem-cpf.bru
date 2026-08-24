@@ -1,0 +1,34 @@
+meta {
+  name: 03 POST sem cpf (422 dados_invalidos)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/elegibilidades
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "codigo_operadora": "OPS-001",
+    "matricula_plano": "MAT-2026-001"
+  }
+}
+
+assert {
+  res.status: eq 422
+  res.body.codigo: eq dados_invalidos
+  res.body.detalhes[0].campo: eq body.cpf
+}
+
+docs {
+  Experimento 4 da oficina. O campo obrigatorio cpf foi removido do corpo.
+  O contrato promete 422 com o schema ErroAPI, codigo estavel dados_invalidos
+  e um detalhe apontando o campo exato que falhou.
+}
