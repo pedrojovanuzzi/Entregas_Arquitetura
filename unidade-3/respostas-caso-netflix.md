@@ -3,7 +3,6 @@
 **Aluno:** Pedro Artur Jovanuzzi
 **Disciplina:** Arquitetura de Software, Módulo 3: Serviços
 **Caso:** Netflix: sete anos para reconstruir, dois segundos para começar o filme
-**Data:** 01/09/2026
 
 ## 1. Segundo o anúncio oficial, o que aconteceu em 2008 e qual operação da empresa ficou parada por três dias?
 
@@ -58,12 +57,3 @@ O caso do Hystrix mostra outro lado do mesmo problema. A biblioteca virou padrã
 Juntando os dois fatos, o que fica é que a plataforma de ferramentas de uma empresa é o subproduto do contexto dela, e não um produto pronto para levar. O que dá para reaproveitar de verdade é o raciocínio: por que a Netflix precisou de um disjuntor, que problema o Chaos Monkey resolve, que condições tornam essa prática segura. O padrão sobrevive, seja ele disjuntor de circuito, isolamento de recursos, prazo de espera ou degradação com resposta alternativa. A implementação é substituível, e o Resilience4j entrando no lugar do Hystrix mostra isso bem.
 
 Também vale desconfiar do prazo de validade dos casos de referência. A plataforma de 2012 ainda é apresentada em palestras como se fosse o estado atual da engenharia da Netflix, anos depois de partes dela terem sido aposentadas. Copiar esse retrato é correr o risco de trazer respostas para perguntas que a sua empresa talvez nem tenha, e numa escala em que o remédio sai mais caro que a doença.
-
-## Fontes usadas
-
-- Netflix, Completing the Netflix Cloud Migration, fevereiro de 2016.
-- Netflix, páginas oficiais do programa Open Connect e das especificações dos aparelhos.
-- Netflix Technology Blog: Isthmus, Active-Active for Multi-Regional Resiliency e Project Nimble.
-- Repositórios oficiais do Chaos Monkey e do Hystrix, de onde vêm as duas citações e o aviso de modo de manutenção.
-- Carlos A. Gomez-Uribe e Neil Hunt, The Netflix Recommender System: Algorithms, Business Value, and Innovation, ACM TMIS, dezembro de 2015.
-- Página do caso na disciplina: marco-mendes.github.io/arquitetura-software/modulo-3-servicos/casos-reais/
