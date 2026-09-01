@@ -6,9 +6,11 @@ Entregas do Módulo 3 (Serviços) da disciplina de Arquitetura de Software.
 |---|---|
 | Perguntas do caso real Netflix | [`respostas-caso-netflix.pdf`](respostas-caso-netflix.pdf) (fonte em [`respostas-caso-netflix.md`](respostas-caso-netflix.md)) |
 | Oficina de ferramentas | [`plataforma-hospitalar/`](plataforma-hospitalar) + [`evidencias/`](evidencias) + o relatório abaixo |
+| Estudo de caso do módulo | [`respostas-estudo-de-caso.pdf`](respostas-estudo-de-caso.pdf) (fonte em [`respostas-estudo-de-caso.md`](respostas-estudo-de-caso.md)) |
 
 - Caso real: <https://marco-mendes.github.io/arquitetura-software/modulo-3-servicos/casos-reais/>
 - Oficina: <https://marco-mendes.github.io/arquitetura-software/modulo-3-servicos/oficina-de-ferramentas/>
+- Estudo de caso: <https://marco-mendes.github.io/arquitetura-software/modulo-3-servicos/estudo-de-caso/>
 
 ---
 
@@ -206,6 +208,8 @@ unidade-3/
 ├── README.md                        este relatório
 ├── respostas-caso-netflix.md        respostas do caso Netflix (fonte)
 ├── respostas-caso-netflix.pdf       respostas do caso Netflix (entregável)
+├── respostas-estudo-de-caso.md      respostas do estudo de caso (fonte)
+├── respostas-estudo-de-caso.pdf     respostas do estudo de caso (entregável)
 ├── evidencias/                      12 arquivos de saída da execução real
 └── plataforma-hospitalar/           recorte executável do laboratório usado na oficina
     ├── Dockerfile                   imagem das duas aplicações
