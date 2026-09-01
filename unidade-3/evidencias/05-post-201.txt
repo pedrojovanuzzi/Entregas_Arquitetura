@@ -1,0 +1,8 @@
+$ curl -i -X POST http://localhost:18002/exames -H 'Content-Type: application/json' -d '{"beneficiario_id":"paciente-001","codigo_exame":"HEM-001"}'
+HTTP/1.1 201 Created
+date: Tue, 01 Sep 2026 10:55:28 GMT
+server: uvicorn
+content-length: 102
+content-type: application/json
+
+{"beneficiario_id":"paciente-001","codigo_exame":"HEM-001","solicitacao_id":1,"situacao":"solicitado"}

@@ -1,0 +1,6 @@
+$ docker compose -f infra/compose.servicos.yml ps
+SERVICE            STATUS                    PORTS
+db_elegibilidade   Up 36 seconds (healthy)   5432/tcp
+db_exames          Up 36 seconds (healthy)   5432/tcp
+elegibilidade      Up 33 seconds (healthy)   0.0.0.0:18001->8000/tcp, [::]:18001->8000/tcp
+exames             Up 30 seconds (healthy)   0.0.0.0:18002->8000/tcp, [::]:18002->8000/tcp

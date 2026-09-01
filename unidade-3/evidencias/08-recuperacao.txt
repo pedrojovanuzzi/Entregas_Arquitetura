@@ -1,0 +1,38 @@
+$ docker compose -f infra/compose.servicos.yml up -d --wait
+ Container infra-db_exames-1 Running 
+ Container infra-db_elegibilidade-1 Running 
+ Container infra-exames-1 Running 
+ Container infra-db_elegibilidade-1 Waiting 
+ Container infra-db_elegibilidade-1 Healthy 
+ Container infra-elegibilidade-1 Starting 
+ Container infra-elegibilidade-1 Started 
+ Container infra-db_exames-1 Waiting 
+ Container infra-elegibilidade-1 Waiting 
+ Container infra-db_exames-1 Healthy 
+ Container infra-elegibilidade-1 Healthy 
+ Container infra-exames-1 Waiting 
+ Container infra-db_elegibilidade-1 Waiting 
+ Container infra-db_exames-1 Waiting 
+ Container infra-elegibilidade-1 Waiting 
+ Container infra-exames-1 Healthy 
+ Container infra-db_exames-1 Healthy 
+ Container infra-db_elegibilidade-1 Healthy 
+ Container infra-elegibilidade-1 Healthy 
+
+$ curl -i http://localhost:18001/health
+HTTP/1.1 200 OK
+date: Tue, 01 Sep 2026 10:55:51 GMT
+server: uvicorn
+content-length: 41
+content-type: application/json
+
+{"status":"ok","servico":"elegibilidade"}
+
+$ curl -i http://localhost:18002/health
+HTTP/1.1 200 OK
+date: Tue, 01 Sep 2026 10:55:52 GMT
+server: uvicorn
+content-length: 34
+content-type: application/json
+
+{"status":"ok","servico":"exames"}

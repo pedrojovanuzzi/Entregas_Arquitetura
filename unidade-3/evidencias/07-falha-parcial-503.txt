@@ -1,0 +1,27 @@
+$ docker compose -f infra/compose.servicos.yml stop elegibilidade
+ Container infra-elegibilidade-1 Stopping 
+ Container infra-elegibilidade-1 Stopped 
+
+$ docker compose -f infra/compose.servicos.yml ps
+SERVICE            STATUS                    PORTS
+db_elegibilidade   Up 35 seconds (healthy)   5432/tcp
+db_exames          Up 35 seconds (healthy)   5432/tcp
+exames             Up 29 seconds (healthy)   0.0.0.0:18002->8000/tcp, [::]:18002->8000/tcp
+
+$ curl -i -X POST http://localhost:18002/exames ...   (operacao que atravessa a fronteira)
+HTTP/1.1 503 Service Unavailable
+date: Tue, 01 Sep 2026 10:55:43 GMT
+server: uvicorn
+content-length: 48
+content-type: application/json
+
+{"detail":{"codigo":"dependencia_indisponivel"}}
+
+$ curl -i http://localhost:18002/health              (no mesmo instante)
+HTTP/1.1 200 OK
+date: Tue, 01 Sep 2026 10:55:47 GMT
+server: uvicorn
+content-length: 34
+content-type: application/json
+
+{"status":"ok","servico":"exames"}

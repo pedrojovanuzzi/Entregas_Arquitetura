@@ -1,0 +1,17 @@
+$ curl -i http://localhost:18001/health
+HTTP/1.1 200 OK
+date: Tue, 01 Sep 2026 10:55:27 GMT
+server: uvicorn
+content-length: 41
+content-type: application/json
+
+{"status":"ok","servico":"elegibilidade"}
+
+$ curl -i http://localhost:18002/health
+HTTP/1.1 200 OK
+date: Tue, 01 Sep 2026 10:55:28 GMT
+server: uvicorn
+content-length: 34
+content-type: application/json
+
+{"status":"ok","servico":"exames"}

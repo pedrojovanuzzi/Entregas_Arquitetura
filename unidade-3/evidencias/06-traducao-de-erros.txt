@@ -1,0 +1,19 @@
+# Traducao dos erros do vizinho, com o sistema saudavel
+
+$ POST /exames  -> paciente-002 (existe, mas nao e elegivel)
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 01 Sep 2026 10:55:28 GMT
+server: uvicorn
+content-length: 47
+content-type: application/json
+
+{"detail":{"codigo":"beneficiario_inelegivel"}}
+
+$ POST /exames  -> paciente-999 (nao existe em Elegibilidade: 404 do vizinho)
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 01 Sep 2026 10:55:28 GMT
+server: uvicorn
+content-length: 49
+content-type: application/json
+
+{"detail":{"codigo":"beneficiario_desconhecido"}}
